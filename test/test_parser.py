@@ -16,6 +16,8 @@ class TestTickerFunctions(unittest.TestCase):
         self.assertEqual(self.ticker_list, ['AAPL', 'GOOGL', 'MSFT'])
 
     def test_load_local_ticker_with_empty_file(self):
+        with open(self.file_path, 'w') as csvfile:
+            pass
         load_local_ticker(self.file_path, self.ticker_list)
         self.assertEqual(self.ticker_list, [])
 
