@@ -12,10 +12,10 @@ ROOT = Path(__file__).parent.parent.parent
 ticker_file_path = 'ticker.csv'
 main_data_path = 'data.csv'
 data_path = "data"
-ticker_n = 'SBER' # тикер взятый за эталон
+ticker_n = 'SBER'
 
 
-def get_tickers(ticker_path = os.path.join(ROOT, data_path, ticker_file_path)):
+def get_tickers(ticker_path=os.path.join(ROOT, data_path, ticker_file_path)):
     """
     Получение списка тикеров из файла
     :param ticker_path: путь к файлу с тикерами

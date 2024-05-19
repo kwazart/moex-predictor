@@ -17,17 +17,17 @@ You will be able to:
 
 * **Init DVC** - dvc initialization with prices on tickers. (jenkins alternative)
 * **Init new price downloading** - request for new price data from MOEX with saving at DVC (s3:minio).
-* **Get all versions** - getting all versions of price data with date and time 
-* **Get current version** - getting current version of price data 
+* **Get all versions** - getting all versions of price data with date and time
+* **Get current version** - getting current version of price data
 * **Create new data version** - save current prices as new data version
-* **Switch on specific version** - switching on a specific version of price data 
-* **Switch on last version** - switching on a last version of price data 
+* **Switch on specific version** - switching on a specific version of price data
+* **Switch on last version** - switching on a last version of price data
 
 ## Tickers
 
 You will be able to:
 
-* **Get all tickers** - getting all tickers  
+* **Get all tickers** - getting all tickers
 * **Add new ticker** - adding new ticker for future downloading (will be realized on 0.1.1 version)
 * **Delete ticker by name** - remove ticker from ticker list (will be realized on 0.1.1 version)
 
@@ -59,7 +59,8 @@ app = FastAPI(
     title='MOEX Predictor',
     summary='The app can be useful for prediction by MOEX ticker\'s.',
     description=description,
-    version="0.1.0"
+    version="0.1.0",
+    tags_metadata=tags_metadata
 )
 ROOT = Path(__file__).parent.parent.parent
 data_path = "/data"
@@ -75,7 +76,7 @@ def init_git_and_dvc():
 
 
 @app.get(data_path, tags=["data"], description="Download data from MOEX")
-def download_data():
+def download_data_from_moex():
     return download_data()
 
 

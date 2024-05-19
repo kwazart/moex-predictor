@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 import pickle
-from collections import defaultdict
 
 
 model_path = os.path.join(os.path.dirname(__file__), "..", "..", "data", "model.pkl")
@@ -22,9 +21,6 @@ def predict():
 
     # Найдем колонку с максимальной датой
     last_date_col = max(df.columns)
-
-    # Найдем колонку с минимальной датой
-    first_date_col = min(df.columns)
 
     df_new = df.copy()
     df_new.shift(-1, axis=1)

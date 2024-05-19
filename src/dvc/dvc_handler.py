@@ -39,7 +39,7 @@ def switch_head(tag):
     :return:
     """
     command_1 = f'git checkout "{tag}"'
-    command_2 = f'dvc pull'
+    command_2 = 'dvc pull'
     print(f"Switching ON {tag}")
     os.system(command_1)
     os.system(command_2)
