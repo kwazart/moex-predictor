@@ -1,4 +1,6 @@
+import os
 import unittest
+from pathlib import Path
 
 from src.parser.price_parser import get_tickers
 from src.parser.ticker_parser import clean_tickers
@@ -7,6 +9,8 @@ from src.parser.ticker_parser import clean_tickers
 class TestTickerParser(unittest.TestCase):
 
     def setUp(self):
+        self.ROOT = Path(__file__).parent.parent
+        self.tests_path = "test"
         self.ticker_path = "ticker-test.csv"
 
     def test_get_tickers_valid_path(self):
@@ -14,7 +18,7 @@ class TestTickerParser(unittest.TestCase):
         Test that get_tickers returns a list of cleaned tickers when given a valid path.
         """
         expected_tickers = ['AAA', 'BBB', 'CCC']
-        actual_tickers = get_tickers(self.ticker_path)
+        actual_tickers = get_tickers(os.path.join(self.ROOT, self.tests_path, self.ticker_path))
         self.assertEqual(actual_tickers, expected_tickers)
 
     def test_get_tickers_invalid_path(self):
