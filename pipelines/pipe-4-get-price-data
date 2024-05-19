@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Get data') {
+            steps {
+                sh 'python3 /app/src/parser/price_parser.py'
+            }
+        }
+    }
+}

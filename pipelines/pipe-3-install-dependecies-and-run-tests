@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+         stage('Prepare') {
+            steps {
+                sh 'apt update && apt install python3-all -y && apt install python3-pip -y && pip install -r /app/requirements.txt --break-system-packages'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'cd /app/test && pytest'
+            }
+        }
+    }
+}

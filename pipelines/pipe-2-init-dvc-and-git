@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Check git') {
+            when {
+                expression {
+                    return fileExists('/app/.git')
+                }
+            }
+            steps {
+                sh 'rm -rf /app/.git'
+                echo 'GIT IS CLEANED'
+            }
+        }
+        stage('Check dvc') {
+            when {
+                expression {
+                    return fileExists('/app/.dvc')
+                }
+            }
+            steps {
+                sh 'rm -rf /app/.dvc && rm -f .dvcignore'
+                echo 'DVC IS CLEANED'
+            }
+        }
+        stage('Init DVC and GIT') {
+             steps {
+                sh 'cd /app && scripts/init-dvc.sh'
+            }
+        }
+    }
+}

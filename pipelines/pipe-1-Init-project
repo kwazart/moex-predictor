@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Prepare') {
+            steps {
+                sh 'apt update && apt install python3-all -y && apt install python3-pip -y && pip install -r /app/requirements.txt --break-system-packages'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'cd /app/test && pytest'
+            }
+        }
+        stage('Check git') {
+            when {
+                expression {
+                    return fileExists('/app/.git')
+                }
+            }
+            steps {
+                sh 'rm -rf /app/.git'
+                echo 'GIT IS CLEANED'
+            }
+        }
+        stage('Check dvc') {
+            when {
+                expression {
+                    return fileExists('/app/.dvc')
+                }
+            }
+            steps {
+                sh 'rm -rf /app/.dvc && rm -f .dvcignore'
+                echo 'DVC IS CLEANED'
+            }
+        }
+        stage('Init DVC and GIT') {
+             steps {
+                sh 'cd /app && scripts/init-dvc.sh'
+            }
+        }
+    }
+}
