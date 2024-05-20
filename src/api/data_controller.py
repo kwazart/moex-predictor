@@ -67,7 +67,7 @@ data_path = "/data"
 ticker_path = "/ticker"
 model_path = "/model"
 tag_version = "v"
-master_branch = "master"
+master_branch = "main"
 
 
 @app.post(data_path + "/init", tags=["data"], description="DVC and Git initialization")
